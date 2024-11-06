@@ -14,7 +14,7 @@ export const products = [
     rating: 5,
     reviews: 4,
     title: "Amisa Diamond Chain Bracelet",
-    category: "Bangles & Bracelets",
+    category: "Bracelets",
     sizes: ["16 cm", "18 cm", "20 cm"], // Sizes for this product
     customizations: ["18k Yellow Gold", "18k Rose Gold", "Platinum"] // Customization options
   },

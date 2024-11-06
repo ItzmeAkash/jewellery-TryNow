@@ -13,7 +13,7 @@ const CategoryBar = () => {
     { name: "Rings", path: "/rings" },
     { name: "Earrings", path: "/earrings" },
     { name: "Necklace", path: "/necklace" },
-    { name: "Bangles & Bracelets", path: "/bangles-bracelets" },
+    { name: "Bangles & Bracelets", path: "/bracelets" },
     { name: "Solitaires", path: "/solitaires" },
     { name: "Mangalsutras & Pendants", path: "/mangalsutras-pendants" },
     { name: "Other Jewellery", path: "/other-jewellery" },
@@ -21,8 +21,8 @@ const CategoryBar = () => {
   ];
 
   const handleCategoryClick = (category) => {
-    setSelectedCategory(category.name); // Update selected category
-    navigate(category.path);
+    setSelectedCategory(category.name);
+    navigate(`/category${category.path}`);
   };
 
   return (
