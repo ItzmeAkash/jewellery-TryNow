@@ -1,24 +1,21 @@
 import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Bestsellers from "./pages/Bestsellers";
-
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-
+import ProductDetails from "./Pages/ProductDetails";
 
 const App = () => {
   return (
-    <>
-      <BrowserRouter>
-        <div>
-          <Header />
-
-          <Routes>
-            <Route path="/bestsellers" element={<Bestsellers />} />
-          </Routes>
-        </div>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <div>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Bestsellers />} />
+          <Route path="/bestsellers" element={<Bestsellers />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 };
 

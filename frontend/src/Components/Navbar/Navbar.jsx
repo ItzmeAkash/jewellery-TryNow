@@ -43,7 +43,7 @@ const Navbar = () => {
         <div className="flex flex-wrap items-center justify-between mx-0 py-4">
           {/* Logo and Store Section */}
           <div className="flex items-center space-x-4 lg:space-x-8 ml-4 lg:ml-8">
-            <a href="#">
+            <a href="/">
               <img
                 src={logo}
                 alt="Logo"

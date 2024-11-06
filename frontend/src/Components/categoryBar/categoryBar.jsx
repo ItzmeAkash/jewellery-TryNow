@@ -26,12 +26,12 @@ const CategoryBar = () => {
   };
 
   return (
-    <div className="bg-white-100 w-full py-3 flex justify-center space-x-4">
+    <div className="bg-white w-full py-3 flex flex-wrap justify-center gap-2 md:space-x-4">
       {categories.map((category, index) => (
         <button
           key={index}
           onClick={() => handleCategoryClick(category)}
-          className={`text-sm uppercase px-2 py-1 transition-colors duration-300 ${
+          className={`text-xs md:text-sm uppercase px-3 py-1 transition-colors duration-300 ${
             selectedCategory === category.name
               ? 'text-primaryColor' // Selected category color
               : 'text-gray-700 hover:text-primaryColor'
