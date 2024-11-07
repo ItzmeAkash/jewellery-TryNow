@@ -56,11 +56,11 @@ export const products = [
     sizes: ["6", "7", "8"], // Sizes for this product
     customizations: ["18k Yellow Gold", "18k Rose Gold"] // Customization options
   },
-  {
+    {
     id: 4,
     images: [
       "/assets/Golden_Pricess_Diamond_Ring_2.webp",
-      "/assets/Golden_Pricess_Diamond_Ring_1.webp",
+      "/assets/Golden_Pricess_Diamond_Ring_1.webp", 
       "/assets/Golden_Pricess_Diamond_Ring_3.webp",
       "/assets/Golden_Pricess_Diamond_Ring_4.webp"
     ],
@@ -74,5 +74,112 @@ export const products = [
     category: "Rings",
     sizes: ["5", "6", "7"], // Sizes for this product
     customizations: ["18k Yellow Gold", "SI IJ"] // Customization options
-  }
+  },
+  {
+    id: 5,
+    images: [
+      "/assets/AlexaDiamondEarringsMain.webp",
+      "/assets/AlexaDiamondEarrings1.webp", 
+      "/assets/AlexaDiamondEarrings2.webp",
+      "/assets/AlexaDiamondEarrings3.webp"
+    ],
+    label: "IN STOCK",
+    price: "₹21,729",
+    originalPrice: "₹25,273",
+    discount: "14.02% OFF on Making",
+    rating: 4.5,
+    reviews: 4,
+    title: "Alexa Diamond Earrings ",
+    category: "Earrings",
+    sizes: ["5", "6", "7"], // Sizes for this product
+    customizations: ["18k Yellow Gold", "SI IJ"] // Customization options
+  },
+  {
+    id: 5,
+    images: [
+      "/assets/DonaldDiamondPlatinumHoopMain.webp", 
+      "/assets/DonaldDiamondPlatinumHoop1.webp", 
+      "/assets/DonaldDiamondPlatinumHoop2.webp",
+      "/assets/DonaldDiamondPlatinumHoop3.webp"
+    ],
+    label: "IN STOCK",
+    price: "₹20,188",
+    originalPrice: "₹22,648",
+    discount: "10.86%. OFF on Making",
+    rating: 4.5,
+    reviews: 4,
+    title: "Donald Diamond  Hoop ",
+    category: "Earrings",
+    sizes: ["5", "6", "7"], 
+    customizations: ["platinum_950 Platinum", "SI IJ"] 
+  },
+  {
+    id: 6,
+    images: [
+      "/assets/WinterFlowerMiraclePlateDiamondEarringsMain.webp", 
+      "/assets/WinterFlowerMiraclePlateDiamondEarrings1.webp", 
+      "/assets/WinterFlowerMiraclePlateDiamondEarrings2.webp",
+      "/assets/WinterFlowerMiraclePlateDiamondEarrings3.webp"
+    ],
+    label: "IN STOCK",
+    price: "₹40,671",
+    originalPrice: "₹41,623",
+    discount: "10.86%. OFF on Making",
+    rating: 4.9,
+    reviews: 38,
+    title: "Winter Flower  Diamond ",
+    category: "Earrings",
+    sizes: ["5", "6", "7"], 
+    customizations: ["14k Yellow Gold" ,"SI IJ"] 
+  },
+  {
+    id: 6,
+    images: [
+      "/assets/EdelweissMiraclePlateDiamondEarringsMain.webp", 
+      "/assets/EdelweissMiraclePlateDiamondEarrings1.webp", 
+      "/assets/EdelweissMiraclePlateDiamondEarrings2.webp", 
+      "/assets/EdelweissMiraclePlateDiamondEarrings3.webp", 
+
+    ],
+    label: "IN STOCK",
+    price: "₹51,827",
+    originalPrice: "₹52,815",
+    discount: "1.87% OFF on Making",
+    rating: 4.8,
+    reviews: 5,
+    title: "Edelweiss Miracle",
+    category: "Earrings",
+    sizes: ["5", "6", "7"], 
+    customizations: ["14k Yellow Gold" ,"SI IJ"] 
+  },
+  {
+    id: 7,
+    images: [
+      "/assets/SquaredDreamsDiamondStudEarringsMain.webp", 
+      "/assets/SquaredDreamsDiamondStudEarrings1.webp", 
+      "/assets/SquaredDreamsDiamondStudEarrings2.webp", 
+      "/assets/SquaredDreamsDiamondStudEarrings3.webp", 
+
+    ],
+    label: "IN STOCK",
+    price: "₹30,108",
+    originalPrice: "₹32,516",
+    discount: "7.4% OFF on Making",
+    rating: 4.8,
+    reviews: 5,
+    title: "Squared Dreams Stud",
+    category: "Earrings",
+    sizes: ["5", "6", "7"], 
+    customizations: ["14k Yellow Gold" ,"SI IJ"] 
+  },
+
 ];
+
+
+
+
+
+
+
+
+

@@ -1,4 +1,5 @@
 import React from "react";
+import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
@@ -24,7 +25,7 @@ const ProductCard = ({ product }) => {
             }}
             className="absolute top-2 right-2 text-gray-400 hover:text-red-500"
           >
-            ❤
+             <FaHeart />
           </button>
         </div>
         <div className="p-2">

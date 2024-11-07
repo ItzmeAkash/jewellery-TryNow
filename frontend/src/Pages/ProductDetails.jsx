@@ -69,8 +69,8 @@ const ProductDetails = () => {
               </span>
             )}
           </div>
-          <p className="text-sm text-gray-600">
-            OFFER: <span className="font-semibold">{product.discount}</span>
+          <p className="text-sm text-gray-600 ">
+            OFFER: <span className="font-semibold ">{product.discount}</span>
             <span className="ml-2 text-primaryColor underline cursor-pointer">
               Notify me
             </span>{" "}
@@ -87,7 +87,7 @@ const ProductDetails = () => {
           {/* Ring Size */}
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium text-gray-800">
-              Select Ring Size
+              Select {product.category} Size
             </span>
             <span className="text-sm text-primaryColor underline cursor-pointer">
               Find your perfect size
