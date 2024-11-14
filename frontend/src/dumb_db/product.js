@@ -7,6 +7,7 @@ export const products = [
       "/assets/AmisaDimondChainBracelet.jpg",
       "/assets/AmisaDimondChainBracelet.jpg"
     ],
+    tryNowImage: "/assets/AmisaDiamondChainBracelet.png",
     label: "BESTSELLER",
     price: "₹17,792",
     originalPrice: "₹18,245",
@@ -26,6 +27,7 @@ export const products = [
       "/assets/DaarioPlatinumBandForRing.jpg",
       "/assets/DaarioPlatinumBandForRing.jpg"
     ],
+    tryNowImage: "/assets/TryNow.jpg",
     label: "IN STOCK",
     price: "₹35,333",
     originalPrice: "₹43,244",
@@ -45,6 +47,7 @@ export const products = [
       "/assets/Giribala_Infinity_Heart_Diamond_Ring_3.jpg",
       "/assets/Giribala_Infinity_Heart_Diamond_Ring_creative.jpg"
     ],
+    tryNowImage: "/assets/TryNow.jpg",
     label: "TRENDING",
     price: "₹41,293",
     originalPrice: "₹42,246",
@@ -64,6 +67,7 @@ export const products = [
       "/assets/Golden_Pricess_Diamond_Ring_3.webp",
       "/assets/Golden_Pricess_Diamond_Ring_4.webp"
     ],
+    tryNowImage: "/assets/TryNow.jpg",
     label: "IN STOCK",
     price: "₹8,589",
     originalPrice: "₹10,223",
@@ -83,6 +87,7 @@ export const products = [
       "/assets/AlexaDiamondEarrings2.webp",
       "/assets/AlexaDiamondEarrings3.webp"
     ],
+    tryNowImage: "/assets/TryNow.jpg",
     label: "IN STOCK",
     price: "₹21,729",
     originalPrice: "₹25,273",
@@ -95,13 +100,14 @@ export const products = [
     customizations: ["18k Yellow Gold", "SI IJ"] // Customization options
   },
   {
-    id: 5,
+    id: 6,
     images: [
       "/assets/DonaldDiamondPlatinumHoopMain.webp", 
       "/assets/DonaldDiamondPlatinumHoop1.webp", 
       "/assets/DonaldDiamondPlatinumHoop2.webp",
       "/assets/DonaldDiamondPlatinumHoop3.webp"
     ],
+    tryNowImage: "/assets/TryNow.jpg",
     label: "IN STOCK",
     price: "₹20,188",
     originalPrice: "₹22,648",
@@ -114,13 +120,14 @@ export const products = [
     customizations: ["platinum_950 Platinum", "SI IJ"] 
   },
   {
-    id: 6,
+    id: 7,
     images: [
       "/assets/WinterFlowerMiraclePlateDiamondEarringsMain.webp", 
       "/assets/WinterFlowerMiraclePlateDiamondEarrings1.webp", 
       "/assets/WinterFlowerMiraclePlateDiamondEarrings2.webp",
       "/assets/WinterFlowerMiraclePlateDiamondEarrings3.webp"
     ],
+    tryNowImage: "/assets/TryNow.jpg",
     label: "IN STOCK",
     price: "₹40,671",
     originalPrice: "₹41,623",
@@ -133,7 +140,7 @@ export const products = [
     customizations: ["14k Yellow Gold" ,"SI IJ"] 
   },
   {
-    id: 6,
+    id: 8,
     images: [
       "/assets/EdelweissMiraclePlateDiamondEarringsMain.webp", 
       "/assets/EdelweissMiraclePlateDiamondEarrings1.webp", 
@@ -141,6 +148,7 @@ export const products = [
       "/assets/EdelweissMiraclePlateDiamondEarrings3.webp", 
 
     ],
+    tryNowImage: "/assets/TryNow.jpg",
     label: "IN STOCK",
     price: "₹51,827",
     originalPrice: "₹52,815",
@@ -153,7 +161,7 @@ export const products = [
     customizations: ["14k Yellow Gold" ,"SI IJ"] 
   },
   {
-    id: 7,
+    id: 9,
     images: [
       "/assets/SquaredDreamsDiamondStudEarringsMain.webp", 
       "/assets/SquaredDreamsDiamondStudEarrings1.webp", 
@@ -161,6 +169,7 @@ export const products = [
       "/assets/SquaredDreamsDiamondStudEarrings3.webp", 
 
     ],
+    tryNowImage: "/assets/TryNow.jpg",
     label: "IN STOCK",
     price: "₹30,108",
     originalPrice: "₹32,516",
@@ -172,6 +181,7 @@ export const products = [
     sizes: ["5", "6", "7"], 
     customizations: ["14k Yellow Gold" ,"SI IJ"] 
   },
+  
 
 ];
 
