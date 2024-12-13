@@ -8,10 +8,10 @@ const TryNow = ({ onClose, category }) => {
   const streamRef = useRef(null);
 
   useEffect(() => {
-    // Access the camera when the component mounts
     const startCamera = async () => {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        const constraints = { video: true };
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
         streamRef.current = stream;
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
@@ -19,29 +19,39 @@ const TryNow = ({ onClose, category }) => {
         setLoading(false);
       } catch (err) {
         console.error("Error accessing camera:", err);
-        setError("Could not access the camera.");
+        setError(
+          err.name === "NotAllowedError"
+            ? "Camera access denied. Please enable it in your browser settings."
+            : err.name === "NotFoundError"
+            ? "No camera found. Please connect a camera and try again."
+            : err.name === "OverconstrainedError"
+            ? "Camera constraints could not be satisfied."
+            : "Could not access the camera due to an unknown error."
+        );
         setLoading(false);
       }
     };
 
     startCamera();
 
-    // Stop the camera when the component unmounts
     return () => {
       if (streamRef.current) {
-        streamRef.current.getTracks().forEach(track => track.stop());
+        streamRef.current.getTracks().forEach((track) => track.stop());
       }
     };
   }, []);
+
+  const getVideoEndpoint = () => {
+    return `http://localhost:8000/video/${category}`;
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
       <div className="bg-white p-6 rounded-2xl w-11/12 md:w-3/4 lg:w-1/2 xl:w-2/5 shadow-2xl relative animate-fadeIn">
         <button
           onClick={() => {
-            // Stop the camera when the close button is clicked
             if (streamRef.current) {
-              streamRef.current.getTracks().forEach(track => track.stop());
+              streamRef.current.getTracks().forEach((track) => track.stop());
             }
             onClose();
           }}
@@ -63,10 +73,10 @@ const TryNow = ({ onClose, category }) => {
             {error && <p className="text-red-500">{error}</p>}
             {!loading && !error && (
               <img
-              src="http://localhost:8000/video/Bracelets"
-              alt="Bracelet Try-On Video"
-              
-            />
+                src={getVideoEndpoint()}
+                alt={`${category} Try-On Video`}
+                className="w-full h-full object-cover"
+              />
             )}
           </div>
         </div>

@@ -39,7 +39,7 @@ const ProductDetails = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      console.log("Bracelet image uploaded successfully");
+      console.log(`${product.category} image uploaded successfully`);
 
       // Once upload is successful, close loading and open TryNow
       setIsLoading(false);

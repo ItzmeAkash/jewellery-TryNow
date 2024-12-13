@@ -87,7 +87,7 @@ export const products = [
       "/assets/AlexaDiamondEarrings2.webp",
       "/assets/AlexaDiamondEarrings3.webp"
     ],
-    tryNowImage: "/assets/TryNow.jpg",
+    tryNowImage: "/assets/Earrings.png",
     label: "IN STOCK",
     price: "₹21,729",
     originalPrice: "₹25,273",
@@ -99,6 +99,7 @@ export const products = [
     sizes: ["5", "6", "7"], // Sizes for this product
     customizations: ["18k Yellow Gold", "SI IJ"] // Customization options
   },
+  
   {
     id: 6,
     images: [
