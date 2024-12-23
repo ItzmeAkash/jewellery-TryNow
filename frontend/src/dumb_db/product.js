@@ -27,7 +27,7 @@ export const products = [
       "/assets/DaarioPlatinumBandForRing.jpg",
       "/assets/DaarioPlatinumBandForRing.jpg"
     ],
-    tryNowImage: "/assets/TryNow.jpg",
+    tryNowImage: "/assets/DaarioPlatinumPng.png",
     label: "IN STOCK",
     price: "₹35,333",
     originalPrice: "₹43,244",
@@ -47,7 +47,7 @@ export const products = [
       "/assets/Giribala_Infinity_Heart_Diamond_Ring_3.jpg",
       "/assets/Giribala_Infinity_Heart_Diamond_Ring_creative.jpg"
     ],
-    tryNowImage: "/assets/TryNow.jpg",
+    tryNowImage: "/assets/Giribala.png",
     label: "TRENDING",
     price: "₹41,293",
     originalPrice: "₹42,246",
@@ -67,7 +67,7 @@ export const products = [
       "/assets/Golden_Pricess_Diamond_Ring_3.webp",
       "/assets/Golden_Pricess_Diamond_Ring_4.webp"
     ],
-    tryNowImage: "/assets/TryNow.jpg",
+    tryNowImage: "/assets/GoldenPrice.png",
     label: "IN STOCK",
     price: "₹8,589",
     originalPrice: "₹10,223",
@@ -87,7 +87,7 @@ export const products = [
       "/assets/AlexaDiamondEarrings2.webp",
       "/assets/AlexaDiamondEarrings3.webp"
     ],
-    tryNowImage: "/assets/Earrings.png",
+    tryNowImage: "/assets/AlexaDiamondEaring.png",
     label: "IN STOCK",
     price: "₹21,729",
     originalPrice: "₹25,273",
@@ -108,7 +108,7 @@ export const products = [
       "/assets/DonaldDiamondPlatinumHoop2.webp",
       "/assets/DonaldDiamondPlatinumHoop3.webp"
     ],
-    tryNowImage: "/assets/TryNow.jpg",
+    tryNowImage: "/assets/DonaldDiamondPlatinum.png",
     label: "IN STOCK",
     price: "₹20,188",
     originalPrice: "₹22,648",
@@ -128,7 +128,7 @@ export const products = [
       "/assets/WinterFlowerMiraclePlateDiamondEarrings2.webp",
       "/assets/WinterFlowerMiraclePlateDiamondEarrings3.webp"
     ],
-    tryNowImage: "/assets/TryNow.jpg",
+    tryNowImage: "/assets/winterMiraclePlate.png",
     label: "IN STOCK",
     price: "₹40,671",
     originalPrice: "₹41,623",
@@ -149,7 +149,7 @@ export const products = [
       "/assets/EdelweissMiraclePlateDiamondEarrings3.webp", 
 
     ],
-    tryNowImage: "/assets/TryNow.jpg",
+    tryNowImage: "/assets/edelweiss.png",
     label: "IN STOCK",
     price: "₹51,827",
     originalPrice: "₹52,815",
@@ -161,26 +161,90 @@ export const products = [
     sizes: ["5", "6", "7"], 
     customizations: ["14k Yellow Gold" ,"SI IJ"] 
   },
+  
   {
     id: 9,
     images: [
-      "/assets/SquaredDreamsDiamondStudEarringsMain.webp", 
-      "/assets/SquaredDreamsDiamondStudEarrings1.webp", 
-      "/assets/SquaredDreamsDiamondStudEarrings2.webp", 
-      "/assets/SquaredDreamsDiamondStudEarrings3.webp", 
+      "/assets/ZenniDiamondPendant.webp", 
+      "/assets/ZenniDiamondPendant1.webp", 
+      "/assets/ZenniDiamondPendant2.webp", 
+      "/assets/ZenniDiamondPendant4.webp", 
 
     ],
-    tryNowImage: "/assets/TryNow.jpg",
+    tryNowImage: "/assets/ZenniDiamondPendantTRY.png",
     label: "IN STOCK",
-    price: "₹30,108",
-    originalPrice: "₹32,516",
-    discount: "7.4% OFF on Making",
-    rating: 4.8,
-    reviews: 5,
-    title: "Squared Dreams Stud",
-    category: "Earrings",
+    price: "₹23,650",
+    originalPrice: "₹24,165",
+    discount: "10% OFF on Making",
+    rating: 5,
+    reviews: 3,
+    title: "Zenni Diamond Pendant",
+    category: "Necklace",
     sizes: ["5", "6", "7"], 
     customizations: ["14k Yellow Gold" ,"SI IJ"] 
+  },
+  {
+    id: 10,
+    images: [
+      "/assets/SInitialDiamondPendant.jpeg", 
+      "/assets/SInitialDiamondPendant1.jpeg", 
+      "/assets/SInitialDiamondPendant2.jpeg", 
+      "/assets/SInitialDiamondPendant3.jpeg", 
+
+    ],
+    tryNowImage: "/assets/SInitialDiamondPendanttrynow.png",
+    label: "IN STOCK",
+    price: "₹23,885",
+    originalPrice: "₹24,590",
+    discount: "10% OFF on Making",
+    rating: 5,
+    reviews: 3,
+    title: "S Initial Pendant",
+    category: "Necklace",
+    sizes: ["5", "6", "7"], 
+    customizations: ["14k Rose Gold" ,"SI IJ"] 
+  },
+  {
+    id: 11,
+    images: [
+      "/assets/FlowStripDiamond.webp", 
+      "/assets/FlowStripDiamond1.webp", 
+      "/assets/FlowStripDiamond2.webp", 
+      "/assets/FlowStripDiamond3.webp", 
+
+    ],
+    tryNowImage: "/assets/FlowStripDiamondTryNow.png",
+    label: "IN STOCK",
+    price: "₹44,280",
+    originalPrice: "₹48,554",
+    discount: "50% OFF on Making",
+    rating: 5,
+    reviews: 3,
+    title: "Flow Strip Diamond",
+    category: "Necklace",
+    sizes: ["5", "6", "7"], 
+    customizations: ["14k Rose Gold" ,"SI IJ"] 
+  },
+  {
+    id: 12,
+    images: [
+      "/assets/ButterflyDiamond.webp", 
+      "/assets/ButterflyDiamond1.webp", 
+      "/assets/ButterflyDiamond2.webp", 
+      "/assets/ButterflyDiamond3.webp", 
+
+    ],
+    tryNowImage: "/assets/ButterflyDiamond.png",
+    label: "IN STOCK",
+    price: "₹44,280",
+    originalPrice: "₹48,554",
+    discount: "50% OFF on Making",
+    rating: 5,
+    reviews: 3,
+    title: "Flow Strip Diamond",
+    category: "Necklace",
+    sizes: ["5", "6", "7"], 
+    customizations: ["14k Rose Gold" ,"SI IJ"] 
   },
   
 

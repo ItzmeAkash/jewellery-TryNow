@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import { products } from "../dumb_db/product"; // Assuming this is the data source
 import TryNow from "../Components/TryNow/TryNow";
+import axiosInstance from "../Components/axiosInstance";
 
 const ProductDetails = () => {
   const [isTryNowOpen, setIsTryNowOpen] = useState(false);
@@ -32,7 +33,7 @@ const ProductDetails = () => {
       formData.append("file", response.data, "image.png");
 
       // Use the category in the URL to make it dynamic
-      const uploadUrl = `http://127.0.0.1:8000/upload/${product.category}`;
+      const uploadUrl = `${axiosInstance.defaults.baseURL}upload/${product.category}`;
 
       // Send the FormData to the backend with the dynamic URL
       await axios.post(uploadUrl, formData, {

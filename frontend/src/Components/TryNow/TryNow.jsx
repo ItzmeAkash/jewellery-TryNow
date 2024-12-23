@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
+import axiosInstance from "../axiosInstance";
 
 const TryNow = ({ onClose, category }) => {
   const [loading, setLoading] = useState(true);
@@ -34,27 +35,55 @@ const TryNow = ({ onClose, category }) => {
 
     startCamera();
 
+    const handleBeforeUnload = async (event) => {
+      // Stop the camera
+      stopCamera();
+
+      // Optionally notify the backend
+      await axiosInstance.post("/stop-process");
+
+      // Prevent the default unload behavior (optional)
+      event.preventDefault();
+      event.returnValue = "";
+    };
+
+    // Add the beforeunload event listener
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
     return () => {
-      if (streamRef.current) {
-        streamRef.current.getTracks().forEach((track) => track.stop());
-      }
+      // Cleanup camera and remove event listener on component unmount
+      stopCamera();
+      window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, []);
 
+  const stopCamera = () => {
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach((track) => {
+        track.stop(); // Stop all video tracks
+      });
+      streamRef.current = null; // Reset stream reference
+      if (videoRef.current) {
+        videoRef.current.srcObject = null; // Clear video element source
+      }
+    }
+  };
+
+  const handleClose = async () => {
+    await axiosInstance.post("/stop-process"); // Optionally notify backend to close camera feed
+    stopCamera(); // Stop camera before closing
+    onClose(); // Call parent-provided close function
+  };
+
   const getVideoEndpoint = () => {
-    return `http://localhost:8000/video/${category}`;
+    return `${axiosInstance.defaults.baseURL}video/${category}`;
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
       <div className="bg-white p-6 rounded-2xl w-11/12 md:w-3/4 lg:w-1/2 xl:w-2/5 shadow-2xl relative animate-fadeIn">
         <button
-          onClick={() => {
-            if (streamRef.current) {
-              streamRef.current.getTracks().forEach((track) => track.stop());
-            }
-            onClose();
-          }}
+          onClick={handleClose}
           className="absolute top-4 right-4 text-gray-600 hover:text-red-500 font-bold text-2xl"
         >
           &times;
@@ -66,7 +95,7 @@ const TryNow = ({ onClose, category }) => {
         </div>
 
         <div className="flex flex-col items-center">
-          <div className="bg-gray-200 w-full h-64 rounded-xl flex items-center justify-center overflow-hidden shadow-inner">
+          <div className="bg-gray-200 w-full h-96 rounded-xl flex items-center justify-center overflow-hidden shadow-inner">
             {loading && !error && (
               <div className="animate-pulse text-gray-500">Loading video feed...</div>
             )}

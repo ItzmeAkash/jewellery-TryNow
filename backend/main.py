@@ -1,4 +1,6 @@
 from fastapi import FastAPI, UploadFile, File
+from fastapi.responses import JSONResponse
+from threading import Thread
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 import cv2
@@ -27,6 +29,9 @@ face_mesh = mp_face_mesh.FaceMesh(static_image_mode=False, max_num_faces=1, min_
 # Global variables for images
 bracelet_img = None
 earring_img = None
+necklace_img=None
+ring_img=None
+should_run = True 
 
 
 def calculate_distance(point1, point2):
@@ -83,10 +88,30 @@ async def upload_earring(file: UploadFile = File(...)):
         return {"error": "Failed to load earring image."}
     return {"message": "Earring image uploaded successfully."}
 
+@app.post("/upload/Necklace")
+async def upload_necklace(file: UploadFile = File(...)):
+    global necklace_img
+    contents = await file.read()
+    np_img = np.frombuffer(contents, np.uint8)
+    necklace_img = cv2.imdecode(np_img, cv2.IMREAD_UNCHANGED)
+    if necklace_img is None:
+        return {"error": "Failed to load earring image."}
+    return {"message": "Earring image uploaded successfully."}
+
+@app.post("/upload/Rings")
+async def upload_ring(file: UploadFile = File(...)):
+    global ring_img
+    contents = await file.read()
+    np_img = np.frombuffer(contents, np.uint8)
+    ring_img = cv2.imdecode(np_img, cv2.IMREAD_UNCHANGED)
+    if ring_img is None:
+        return {"error": "Failed to load earring image."}
+    return {"message": "Earring image uploaded successfully."}
 
 def generate_video_bracelet():
+    global should_run
     cap = cv2.VideoCapture(0)
-    while cap.isOpened():
+    while cap.isOpened() and should_run:
         ret, frame = cap.read()
         if not ret:
             break
@@ -103,21 +128,28 @@ def generate_video_bracelet():
 
                 wrist_point = (int(wrist.x * w), int(wrist.y * h))
                 index_point = (int(index_finger_base.x * w), int(index_finger_base.y * h))
-                bracelet_size = calculate_distance(wrist_point, index_point)
-
-                x = wrist_point[0] - bracelet_size // 2
-                y = wrist_point[1] - bracelet_size // 2
+                bracelet_size = max(1, calculate_distance(wrist_point, index_point))
+                x = max(0, wrist_point[0] - bracelet_size // 2)
+                y = max(0, wrist_point[1] - bracelet_size // 2)
+                bracelet_size = min(bracelet_size, frame.shape[1] - x, frame.shape[0] - y)
 
                 frame = overlay_transparent(frame, bracelet_img, x, y, (bracelet_size, bracelet_size))
 
         _, jpeg = cv2.imencode('.jpg', frame)
         yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n')
+        # Check for manual termination
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            should_run = False
+            break
+        
     cap.release()
+    cv2.destroyAllWindows()
 
 
 def generate_video_earring():
+    global should_run
     cap = cv2.VideoCapture(0)
-    while cap.isOpened():
+    while cap.isOpened() and should_run:
         ret, frame = cap.read()
         if not ret:
             break
@@ -143,19 +175,149 @@ def generate_video_earring():
 
         _, jpeg = cv2.imencode('.jpg', frame)
         yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n')
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            should_run = False
+            break
+        
     cap.release()
+    cv2.destroyAllWindows()
+
+def generate_video_necklace():
+    global should_run    
+    cap = cv2.VideoCapture(0)
+    while cap.isOpened() and should_run:
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        frame = cv2.flip(frame, 1)
+        rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+        results = face_mesh.process(rgb_frame)
+
+        if results.multi_face_landmarks:
+            for face_landmarks in results.multi_face_landmarks:
+                h, w, _ = frame.shape
+
+                try:
+                    # Get key landmarks for neck and shoulders
+                    chin_point = face_landmarks.landmark[152]  # Chin
+                    left_shoulder_point = face_landmarks.landmark[234]  # Approximate left shoulder
+                    right_shoulder_point = face_landmarks.landmark[454]  # Approximate right shoulder
+
+                    chin = (int(chin_point.x * w), int(chin_point.y * h))
+                    left_shoulder = (int(left_shoulder_point.x * w), int(left_shoulder_point.y * h))
+                    right_shoulder = (int(right_shoulder_point.x * w), int(right_shoulder_point.y * h))
+
+                    # Ensure the shoulders are detected and prevent errors
+                    if not all([chin, left_shoulder, right_shoulder]):
+                        raise ValueError("One or more key landmarks are missing.")
+
+                    # Ensure equal shoulder distance and center the necklace
+                    necklace_width = int(calculate_distance(left_shoulder, right_shoulder) * 1.3)  # Increased width
+                    necklace_height = int(necklace_width * 0.5)  # Adjust proportional height
+
+                    # Center the necklace between the shoulders
+                    x = (left_shoulder[0] + right_shoulder[0]) // 2 - necklace_width // 2
+                    y = chin[1] + int(necklace_height * 0.4)  # Adjust height slightly below the chin
+
+                    frame = overlay_transparent(frame, necklace_img, x, y, (necklace_width, necklace_height))
+
+                except Exception as e:
+                    print(f"Error while processing landmarks: {e}")
+                    continue  # Skip to the next frame if an error occurs
+
+        _, jpeg = cv2.imencode('.jpg', frame)
+        yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n')
+    
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            should_run = False
+            break
+        
+    cap.release()
+    cv2.destroyAllWindows()
+
+def generate_video_ring():
+    global should_run
+    cap = cv2.VideoCapture(0)
+    while cap.isOpened() and should_run:
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        frame = cv2.flip(frame, 1)
+        rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+        try:
+            results = hands.process(rgb_frame)
+
+            if results.multi_hand_landmarks:
+                for hand_landmarks in results.multi_hand_landmarks:
+                    h, w, _ = frame.shape
+
+                    # Landmarks for ring finger
+                    ring_finger_tip = hand_landmarks.landmark[mp_hands.HandLandmark.RING_FINGER_TIP]
+                    ring_finger_dip = hand_landmarks.landmark[mp_hands.HandLandmark.RING_FINGER_DIP]
+
+                    ring_tip = (int(ring_finger_tip.x * w), int(ring_finger_tip.y * h))
+                    ring_dip = (int(ring_finger_dip.x * w), int(ring_finger_dip.y * h))
+
+                    ring_width = calculate_distance(ring_tip, ring_dip)
+                    ring_height = int(ring_width * 1.5)
+
+                    # Larger offset to move the ring further downward
+                    offset = int(0.09 * h)  # 9% of frame height
+                    x = ring_dip[0] - ring_width // 2
+                    y = ring_dip[1] - ring_height // 2 + offset
+
+                    frame = overlay_transparent(frame, ring_img, x, y, (ring_width, ring_height))
+        except Exception as e:
+            print(f"Error while processing landmarks: {e}")
+            continue  # Skip to the next frame if an error occurs
+
+        _, jpeg = cv2.imencode('.jpg', frame)
+        yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n')
+
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            should_run = False
+            break
+        
+    cap.release()
+    cv2.destroyAllWindows()
 
 
 @app.get("/video/Bracelets")
 async def video_bracelet():
+    global should_run
+    should_run = True
     return StreamingResponse(generate_video_bracelet(), media_type="multipart/x-mixed-replace; boundary=frame")
 
 
 @app.get("/video/Earrings")
 async def video_earring():
+    global should_run
+    should_run = True
     return StreamingResponse(generate_video_earring(), media_type="multipart/x-mixed-replace; boundary=frame")
 
+@app.get("/video/Necklace")
+async def video_earring():
+    global should_run
+    should_run = True    
+    return StreamingResponse(generate_video_necklace(), media_type="multipart/x-mixed-replace; boundary=frame")
 
+@app.get("/video/Rings")
+async def video_earring():
+    global should_run
+    should_run = True    
+    return StreamingResponse(generate_video_ring(), media_type="multipart/x-mixed-replace; boundary=frame")
+
+@app.post("/stop-process")
+async def stop_feed():
+    """Endpoint to stop the video feed."""
+    global should_run
+    should_run = False
+    
+    return {"message": "Video feed stopped successfully."}
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
