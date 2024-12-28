@@ -7,7 +7,7 @@ import ProductCard from "../ProductCard/ProductCard";
 const ProductList = () => {
   const { category } = useParams();
 
-  // Filter products by category
+  // Filter products by categorys
   const filteredProducts = products.filter(
     (product) => product.category.toLowerCase() === category.toLowerCase()
   );
