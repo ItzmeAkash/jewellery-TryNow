@@ -101,7 +101,7 @@ const TryNow = ({ onClose, category }) => {
             )}
             {error && <p className="text-red-500">{error}</p>}
             {!loading && !error && (
-              <img
+              <iframe
                 src={getVideoEndpoint()}
                 alt={`${category} Try-On Video`}
                 className="w-full h-full object-cover"
